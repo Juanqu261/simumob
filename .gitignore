@@ -172,3 +172,15 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Django
+*.sqlite3
+/staticfiles/
+
+# Node.js
+node_modules/
+dist/
+
+# Vite/React
+*.log
+.vite/
