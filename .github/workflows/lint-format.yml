@@ -1,0 +1,31 @@
+name: Format and Lint Code
+
+on: [push, pull_request]
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies and run tests (if backend exists)
+        run: |
+          if [ -f "backend/requirements.txt" ]; then
+            pip install -r backend/requirements.txt
+            cd backend
+            python manage.py test || exit 1
+          else
+            echo "No backend found. Skipping Django tests."
+          fi
+        env:
+          DJANGO_SETTINGS_MODULE: your_project.settings  # cámbialo por el nombre real del módulo
