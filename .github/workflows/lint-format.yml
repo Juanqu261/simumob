@@ -1,9 +1,9 @@
-name: Django Tests
+name: Format and Lint Code
 
 on: [push, pull_request]
 
 permissions:
-  contents: writes
+  contents: write
 
 jobs:
   test:
