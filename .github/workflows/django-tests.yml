@@ -25,3 +25,5 @@ jobs:
           fi
         env:
           DJANGO_SETTINGS_MODULE: backend.settings  # cámbialo por el nombre real del módulo
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: ${{ secrets.DEBUG }} 

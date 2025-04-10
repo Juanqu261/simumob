@@ -26,6 +26,7 @@ jobs:
             black backend/
           else
             echo "No backend directory, skipping Python formatting."
+          fi
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -38,6 +39,7 @@ jobs:
             cd frontend && npm install
           else
             echo "No frontend found, skipping JS linting/formatting."
+          fi
 
       - name: Lint and format JS (if frontend exists)
         run: |
@@ -57,3 +59,4 @@ jobs:
           else
             git commit -m "chore: auto-format with black/prettier"
             git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref_name }}
+          fi
