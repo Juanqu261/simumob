@@ -15,15 +15,18 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies and run tests (if backend exists)
+      - name: Install dependencies
         run: |
-          if [ -f "backend/requirements.txt" ]; then
-            pip install -r backend/requirements.txt
-            python manage.py test || exit 1
-          else
-            echo "No backend found. Skipping Django tests."
-          fi
-        env:
-          DJANGO_SETTINGS_MODULE: backend.settings  # cámbialo por el nombre real del módulo
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DEBUG: ${{ secrets.DEBUG }} 
+          pip install -r backend/requirements.txt
+          pip install pytest pytest-django pytest-dotenv
+
+      - name: Create .env file
+        working-directory: backend
+        run: |
+          echo "WEATHER_KEY=${{ secrets.WEATHER_KEY }}" >> .env
+          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
+
+      - name: Run Django tests
+        working-directory: backend
+        run: |
+          pytest
