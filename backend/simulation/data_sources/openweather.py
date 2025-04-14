@@ -32,9 +32,9 @@ def obtener_datos_climaticos(lat, lon):
     if response.status_code == 200:
         data = response.json()
         return {
-            'temperatura': data['current']['temp'],
-            'descripcion': data['current']['weather'][0]['description'],
-            "humedad": data["current"]["humidity"]
+            "temperatura": data["current"]["temp"],
+            "descripcion": data["current"]["weather"][0]["description"],
+            "humedad": data["current"]["humidity"],
         }
     else:
         return {"error": f"API error: {response.status_code}"}
