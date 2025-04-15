@@ -1,5 +1,5 @@
-import requests
 from decouple import config
+from security import safe_requests
 
 
 def obtener_datos_climaticos(lat, lon):
@@ -28,7 +28,7 @@ def obtener_datos_climaticos(lat, lon):
     api_key = config("WEATHER_KEY")
 
     base_url = f"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude=minutely,hourly,daily,alerts&appid={api_key}&units=metric&lang=es"
-    response = requests.get(base_url)
+    response = safe_requests.get(base_url)
     if response.status_code == 200:
         data = response.json()
         return {
