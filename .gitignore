@@ -184,3 +184,6 @@ dist/
 # Vite/React
 *.log
 .vite/
+
+# Large files
+*.csv
